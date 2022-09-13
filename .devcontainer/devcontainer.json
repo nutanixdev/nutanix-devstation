@@ -1,0 +1,106 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.241.1/containers/python-3
+{
+	"name": "Nutanix DevStation (Community)",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use -bullseye variants on local on arm64/Apple Silicon.
+			"VARIANT": "3.10-bullseye",
+			// Options
+			"ENABLE_NONROOT_DOCKER": "true",
+			"USE_MOBY": "true",
+			"DOCKER_VERSION": "latest",
+			"NODE_VERSION": "none", // [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+			"ANSIBLE_VERSION": "6.2.0",
+			"PACKER_VERSION": "1.8.3",
+			"CALM_DSL_VERSION": "3.5.0",
+			"KUBECTL_KARBON": "true",
+			"OPENSHIFT_CLI_VERSION": "latest",
+			"CLUSTERCTL_VERSION": "latest"
+		}
+	},
+	"runArgs": [
+		"--init",
+		"--privileged",
+		"--env-file",
+		".devcontainer/devcontainer.env"
+	],
+	"overrideCommand": false,
+	"mounts": [
+		"source=vscode-devcontainer-nutanixdev-minikube-var-lib-docker,target=/var/lib/docker,type=volume",
+		"source=vscode-devcontainer-nutanixdev-calmdsl-cache,target=/home/vscode/.calm,type=volume",
+		"source=vscode-devcontainer-nutanixdev-bashhistory,target=/home/vscode/.nutanixdev,type=volume"
+	],
+	"remoteEnv": {
+		"CALM_DSL_PC_USERNAME": "${containerEnv:NUTANIX_USERNAME}",
+		"CALM_DSL_PC_PASSWORD": "${containerEnv:NUTANIX_PASSWORD}",
+		"CALM_DSL_PC_IP": "${containerEnv:NUTANIX_ENDPOINT}",
+		"CALM_DSL_PC_PORT": "${containerEnv:NUTANIX_PORT}",
+		"PKR_VAR_NUTANIX_USERNAME": "${containerEnv:NUTANIX_USERNAME}",
+		"PKR_VAR_NUTANIX_PASSWORD": "${containerEnv:NUTANIX_PASSWORD}",
+		"PKR_VAR_NUTANIX_ENDPOINT": "${containerEnv:NUTANIX_ENDPOINT}",
+		"PKR_VAR_NUTANIX_PORT": "${containerEnv:NUTANIX_PORT}",
+		"PKR_VAR_NUTANIX_INSECURE": "${containerEnv:NUTANIX_INSECURE}",
+		"NUTANIX_USER": "${containerEnv:NUTANIX_USERNAME}"
+	},
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				// "terminal.integrated.profiles.linux": {
+				// 	"bash": {
+				// 		"path": "/bin/bash",
+				// 		"icon": "terminal-bash"
+				// 	},
+				// 	"zsh": {
+				// 		"path": "/bin/zsh"
+				// 	}
+				// },
+				// "terminal.integrated.showExitAlert": false,
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+				"python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+				"python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+				"python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-vscode.azurecli",
+				"4ops.packer",
+				"richie5um2.vscode-statusbar-json-path",
+				// "redhat.ansible",
+				"mutantdino.resourcemonitor",
+				"ms-azuretools.vscode-docker",
+				"ms-kubernetes-tools.vscode-kubernetes-tools"
+			]
+		}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+	"features": {
+		"kubectl-helm-minikube": "latest",
+		"terraform": "1.2",
+		"aws-cli": "latest",
+		"azure-cli": "latest",
+		"powershell": "7.2.6",
+		"github-cli": "latest"
+	}
+}
