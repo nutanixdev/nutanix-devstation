@@ -99,7 +99,7 @@ cd /tmp/k9s-downloads
 # Install k9s
 echo "Downloading k9s..."
 
-if [ "${architecture}" -eq "amd64" ]; then
+if [ "${architecture}" = "amd64" ]; then
     architecture="x86_64"
 fi
 
