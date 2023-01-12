@@ -98,6 +98,11 @@ cd /tmp/k9s-downloads
 
 # Install k9s
 echo "Downloading k9s..."
+
+if [ "${architecture}" -eq "amd64" ]; then
+    architecture="x86_64"
+fi
+
 k9s_filename="k9s_Linux_${architecture}.tar.gz"
 curl -sSL -o ${k9s_filename} "https://github.com/derailed/k9s/releases/download/v${K9S_VERSION}/${k9s_filename}"
 
