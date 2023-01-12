@@ -7,12 +7,12 @@
 # Based on: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/terraform.md
 # Maintainer: Jose Gomez - Nutanix
 #
-# Syntax: ./openshiftcli-linux.sh [openshift version] [openshift SHA]
+# Syntax: ./openshift-install-linux.sh [openshift version] [openshift SHA]
 
 set -e
 
-OPENSHIFT_CLI_VERSION="${1:-"latest"}"
-OPENSHIFT_CLI_SHA256="${2:-"automatic"}"
+OPENSHIFT_INSTALL_VERSION="${1:-"latest"}"
+OPENSHIFT_INSTALL_SHA256="${2:-"automatic"}"
 
 REDHAT_GPG_KEY="199E2F91FD431D51"
 GPG_KEY_SERVERS="keyserver hkp://keyserver.ubuntu.com:80
@@ -90,23 +90,23 @@ export DEBIAN_FRONTEND=noninteractive
 mkdir -p /tmp/openshift-downloads
 cd /tmp/openshift-downloads
 
-# Install OpenShift CLI
-echo "Downloading oc..."
-oc_filename="openshift-client-linux.tar.gz"
-curl -sSL -o ${oc_filename} "https://mirror.openshift.com/pub/openshift-v4/${architecture}/clients/ocp/${OPENSHIFT_CLI_VERSION}/${oc_filename}"
+# Install OpenShift Install CLI
+echo "Downloading openshift-install..."
+openshiftinstall_filename="openshift-install-linux.tar.gz"
+curl -sSL -o ${openshiftinstall_filename} "https://mirror.openshift.com/pub/openshift-v4/${architecture}/clients/ocp/${OPENSHIFT_INSTALL_VERSION}/${openshiftinstall_filename}"
 
-if [ "${OPENSHIFT_CLI_SHA256}" != "dev-mode" ]; then
-    if [ "${OPENSHIFT_CLI_SHA256}" = "automatic" ]; then
+if [ "${OPENSHIFT_INSTALL_SHA256}" != "dev-mode" ]; then
+    if [ "${OPENSHIFT_INSTALL_SHA256}" = "automatic" ]; then
         receive_gpg_keys REDHAT_GPG_KEY
-        curl -sSL -o OPENSHIFT_CLI_SHA256 https://mirror.openshift.com/pub/openshift-v4/${architecture}/clients/ocp/${OPENSHIFT_CLI_VERSION}/sha256sum.txt
-        curl -sSL -o OPENSHIFT_CLI_SHA256.gpg https://mirror.openshift.com/pub/openshift-v4/${architecture}/clients/ocp/${OPENSHIFT_CLI_VERSION}/sha256sum.txt.gpg
+        curl -sSL -o OPENSHIFT_INSTALL_SHA256 https://mirror.openshift.com/pub/openshift-v4/${architecture}/clients/ocp/${OPENSHIFT_INSTALL_VERSION}/sha256sum.txt
+        curl -sSL -o OPENSHIFT_INSTALL_SHA256.gpg https://mirror.openshift.com/pub/openshift-v4/${architecture}/clients/ocp/${OPENSHIFT_INSTALL_VERSION}/sha256sum.txt.gpg
     else
-        echo "${OPENSHIFT_CLI_SHA256} *${oc_filename}" > OPENSHIFT_CLI_SHA256
+        echo "${OPENSHIFT_INSTALL_SHA256} *${openshiftinstall_filename}" > OPENSHIFT_INSTALL_SHA256
     fi
 fi
 
-tar -xzf ${oc_filename}
-mv -f oc /usr/local/bin/
+tar -xzf ${openshiftinstall_filename}
+mv -f openshift-install /usr/local/bin/
 
 rm -rf /tmp/openshift-downloads ${GNUPGHOME}
 echo "Done!"
