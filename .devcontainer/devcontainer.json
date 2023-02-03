@@ -10,7 +10,7 @@
 			// Options
 			"ANSIBLE_VERSION": "7.1.0",
 			"PACKER_VERSION": "1.8.5",
-			"CALM_DSL_VERSION": "3.5.2",
+			"CALM_DSL_VERSION": "master", // "3.5.2",
 			"KUBECTL_KARBON": "true",
 			"NUTANIX_V4_SDK": "true",
 			"OPENSHIFT_CLI_VERSION": "4.11.22",

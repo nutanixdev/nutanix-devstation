@@ -96,18 +96,23 @@ if ! type git > /dev/null 2>&1; then
 fi
 
 # Verify requested version is available, convert latest
-find_version_from_git_tags CALM_DSL_VERSION 'https://github.com/nutanix/calm-dsl'
-
+echo "Downloading Calm DSL..."
 mkdir -p /tmp/calmdsl-downloads
 cd /tmp/calmdsl-downloads
 
-# Install Calm DSL
-echo "Downloading Calm DSL..."
-calmdsl_filename="v${CALM_DSL_VERSION}.zip"
-curl -sSL -o ${calmdsl_filename} "https://github.com/nutanix/calm-dsl/archive/refs/tags/${calmdsl_filename}"
+if [ "${CALM_DSL_VERSION}" = "master" ]; then
+    calmdsl_filename="calm-dsl-master.zip"
+    curl -sSL -o ${calmdsl_filename} "https://github.com/nutanix/calm-dsl/archive/refs/heads/master.zip"
+else
+    find_version_from_git_tags CALM_DSL_VERSION 'https://github.com/nutanix/calm-dsl'
+    calmdsl_filename="v${CALM_DSL_VERSION}.zip"
+    curl -sSL -o ${calmdsl_filename} "https://github.com/nutanix/calm-dsl/archive/refs/tags/${calmdsl_filename}"
+fi
 
+# Install Calm DSL
 unzip ${calmdsl_filename}
 cd calm-dsl-${CALM_DSL_VERSION}
+sed -i "s/asciimatics>==1.13.0/asciimatics>=1.13.0/" requirements.txt
 pip3 --disable-pip-version-check --no-cache-dir install -r requirements.txt
 make dist
 pip3 --disable-pip-version-check --no-cache-dir install dist/calm.dsl*.whl

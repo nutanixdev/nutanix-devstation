@@ -20,5 +20,6 @@
 - [x] OpenShift Install CLI v4.11.22
 - [x] Clusterctl v1.3.2
 - [x] k9s v0.26.7
+- [x] Cookiecutter v2.1.1
 - [ ] Nutanix CLI (nCLI)
 - [ ] Acropolis CLI (aCLI)
