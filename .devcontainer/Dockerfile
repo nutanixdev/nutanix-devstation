@@ -15,6 +15,7 @@ ARG K9S_VERSION="none"
 ARG KUBECTL_KARBON="false"
 ARG NUTANIX_V4_SDK="false"
 ARG CALM_DSL_VERSION="none"
+ARG COOKIECUTTER_VERSION="none"
 
 
 COPY library-scripts/*.sh /tmp/library-scripts/
@@ -29,12 +30,12 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/home/$USERNA
 # Install OpenShift CLI
 RUN if [ "${OPENSHIFT_CLI_VERSION}" != "none" ]; then \
         bash /tmp/library-scripts/openshiftcli-linux.sh "${OPENSHIFT_CLI_VERSION}"; \
-    fi 
+    fi
 
 # Install OpenShift Install CLI
 RUN if [ "${OPENSHIFT_INSTALL_VERSION}" != "none" ]; then \
         bash /tmp/library-scripts/openshift-install-linux.sh "${OPENSHIFT_INSTALL_VERSION}"; \
-    fi 
+    fi
 
 # Install Ansible
 RUN if [ "${ANSIBLE_VERSION}" != "none" ]; then \
@@ -50,12 +51,12 @@ RUN if [ "${PACKER_VERSION}" != "none" ]; then \
 # Install Clusterctl CLI
 RUN if [ "${CLUSTERCTL_VERSION}" != "none" ]; then \
         bash /tmp/library-scripts/clusterctl-linux.sh "${CLUSTERCTL_VERSION}"; \
-    fi 
+    fi
 
 # Install k9s CLI
 RUN if [ "${K9S_VERSION}" != "none" ]; then \
         bash /tmp/library-scripts/k9s-linux.sh "${K9S_VERSION}"; \
-    fi 
+    fi
 
 # Install kubectl karbon
 RUN if [ "${KUBECTL_KARBON}" != "false" ]; then \
@@ -69,6 +70,11 @@ RUN if [ "${CALM_DSL_VERSION}" != "none" ]; then \
         && chown -R $USERNAME /home/$USERNAME/.calm; \
     fi \
     && rm -rf /tmp/library-scripts
+
+RUN if [ "${COOKIECUTTER_VERSION}" != "none" ]; then \
+        pip install cookiecutter==${COOKIECUTTER_VERSION} \
+        && export PATH=$HOME/.local/bin:$PATH; \
+    fi
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY requirements.txt /tmp/pip-tmp/
