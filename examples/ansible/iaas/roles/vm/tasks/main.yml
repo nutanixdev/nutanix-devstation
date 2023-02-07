@@ -1,0 +1,36 @@
+---
+- name: Inputs for vm task
+  include_tasks: vm.yml
+  with_items:
+    - {
+        name: "Ansible-Prod-Wordpress-App",
+        desc: "Ansible-Prod-Wordpress-App",
+        is_connected: True,
+        subnet_name: Ansible-Prod-SubnetA,
+        image_name: "CentOS7.qcow2",
+        private_ip: "",
+      }
+    - {
+        name: "Ansible-Prod-Wordpress-DB",
+        desc: "Ansible-Prod-Wordpress-DB",
+        is_connected: True,
+        subnet_name: Ansible-Prod-SubnetB,
+        image_name: "CentOS7.qcow2",
+        private_ip: 10.1.2.5,
+      }
+    - {
+        name: "Ansible-Dev-Wordpress-App",
+        desc: "Ansible-Dev-Wordpress-App",
+        is_connected: True,
+        subnet_name: Ansible-Dev-SubnetA,
+        image_name: "CentOS7.qcow2",
+        private_ip: "",
+      }
+    - {
+        name: "Ansible-Dev-Wordpress-DB",
+        desc: "Ansible-Dev-Wordpress-DB",
+        is_connected: True,
+        subnet_name: Ansible-Dev-SubnetB,
+        image_name: "CentOS7.qcow2",
+        private_ip: 10.1.2.5,
+      }

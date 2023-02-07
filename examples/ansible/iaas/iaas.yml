@@ -1,0 +1,23 @@
+---
+- name: IaaS Provisioning
+  hosts: localhost
+  gather_facts: false
+  collections:
+    - nutanix.ncp
+  module_defaults:
+    group/nutanix.ncp.ntnx:
+      nutanix_host: ""
+      nutanix_username: ""
+      nutanix_password: ""
+      validate_certs: false
+  tasks:
+    - include_role:
+        name: external_subnet
+    - include_role:
+        name: vpc
+    - include_role:
+        name: overlay_subnet
+    - include_role:
+        name: vm
+    - include_role:
+        name: fip

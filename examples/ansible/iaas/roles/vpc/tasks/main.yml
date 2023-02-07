@@ -1,0 +1,6 @@
+---
+- name: Inputs vpcs task
+  include_tasks: vpc.yml
+  with_items:
+    - { name: Ansible-Prod, subnet_name: Ansible-External-NAT}
+    - { name: Ansible-Dev, subnet_name: Ansible-External-NAT}
