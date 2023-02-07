@@ -1,0 +1,14 @@
+//Provider
+NUTANIX_USERNAME     = ""
+NUTANIX_PASSWORD     = ""
+NUTANIX_ENDPOINT     = ""
+NUTANIX_INSECURE     = true
+NUTANIX_PORT         = 9440
+NUTANIX_WAIT_TIMEOUT = 10
+EXTERNAL_SUBNET = "TF-External-NAT"
+IMAGE_NAME = "CentOS7.qcow2"
+VPC = [ "TF-Dev", "TF-Prod" ]
+SUBNET_A = [ "TF-Dev-SubnetA", "TF-Prod-SubnetA" ]
+SUBNET_B = [ "TF-Dev-SubnetB", "TF-Prod-SubnetB" ]
+VM_APP = [ "TF-Dev-Wordpress-App", "TF-Prod-Wordpress-App" ]
+VM_DB = [ "TF-Dev-Wordpress-DB", "TF-Prod-Wordpress-DB" ]
