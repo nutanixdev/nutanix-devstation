@@ -1,0 +1,71 @@
+### Set endpoint
+@pc-ip = {{$dotenv pc-ip}}
+@basic_auth = Basic {{$dotenv username}} {{$dotenv password}}
+@contentType = application/json
+@accept = application/json
+
+
+
+### Get Image List and Filter Existing Image (with OData filters)
+# @name images_list
+curl --request GET \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images?$filter=name eq 'ubuntu'"
+     
+
+
+#################################################
+# Update an Image
+#################################################
+
+### Get an Image
+@image_ext_id = {{images_list.response.body.data[0].extId}}
+
+### Get an Image body
+@image_data = {{images_list.response.body.data[0]}}
+
+### Set Idempotent ID
+@ubuntu_request_id = {{$guid}}
+
+
+
+### Resource Update Without ETag - HTTP/1.1 428 PRECONDITION REQUIRED
+# @name image_update
+curl --request PUT \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --header "Ntnx-Request-Id: {{ubuntu_request_id}}" \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/{{image_ext_id}}" \
+     --data '{{image_data}}'
+
+
+
+
+### GET the image
+# @name image
+curl --request GET \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/{{image_ext_id}}"
+
+
+
+### Get the image Etag
+@image_etag = {{image.response.headers.ETag}}
+
+
+
+### Resource Update With ETag and If-Match Header - Retry to show precondition failed because new etag
+# @name image_update
+curl --request PUT \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --header "Ntnx-Request-Id: {{ubuntu_request_id}}" \
+     --header "If-Match: {{image_etag}}" \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/{{image_ext_id}}" \
+     --data '{{image_data}}'

@@ -1,0 +1,104 @@
+### Set endpoint
+@pc-ip = {{$dotenv pc-ip}}
+@basic_auth = Basic {{$dotenv username}} {{$dotenv password}}
+@contentType = application/json
+@accept = application/json
+
+
+### GET images - copy from nutanix.dev
+
+
+
+
+### GET images
+# @name images
+curl --request GET \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}"
+
+
+
+### Set a variable to GET an image
+@image_ext_id = {{images.response.body.data[3].extId}}
+
+
+
+### GET an image using External Id
+# @name image
+curl --request GET \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/{{image_ext_id}}" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}"
+
+
+
+### GET an image using External Id
+# @name image_loation
+curl --request GET \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/{{image_ext_id}}/cluster-locations" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}"
+
+
+
+### GET the Cluster UUID
+@cluster_uuid = {{image_loation.response.body.data[0].extId}}
+
+
+
+### Set image to upload
+@ubuntu_uri = https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+
+
+
+### Create an Image (Input Validation)
+# @name image_create
+curl --request POST \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --data '{
+          "name": ubuntu,
+          "type": "DISK_IMAGE.",
+          "source": {
+               "url": "{{ubuntu_uri}}",
+               "allowInsecure": false,
+               "$objectType": "vmm.v4.images.UrlSource"
+          },
+          "initialClusterLocations": [
+               {
+                    "extId": "{{cluster_uuid}}"
+               }
+          ]
+          }
+     '
+
+
+
+### Create an Image (without Ntnx-Request-Id)
+# @name image_create
+curl --request POST \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --data '{
+          "name": "ubuntu",
+          "type": "DISK_IMAGE",
+          "source": {
+               "url": "{{ubuntu_uri}}",
+               "allowInsecure": false,
+               "$objectType": "vmm.v4.images.UrlSource"
+          },
+          "initialClusterLocations": [
+               {
+                    "extId": "{{cluster_uuid}}"
+               }
+          ]
+          }
+     '

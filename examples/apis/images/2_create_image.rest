@@ -1,0 +1,87 @@
+### Set endpoint
+@pc-ip = {{$dotenv pc-ip}}
+@basic_auth = Basic {{$dotenv username}} {{$dotenv password}}
+@contentType = application/json
+@accept = application/json
+
+
+
+### GET all the Clusters registered to Prism Central
+# @name cluster
+curl --request GET \
+     --url "https://{{pc-ip}}:9440/api/clustermgmt/v4.0.a1/config/clusters" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}"
+
+
+
+### GET the Cluster UUID
+@cluster_uuid = {{cluster.response.body.data[1].extId}}
+
+
+
+### Set image to upload
+@ubuntu_uri = https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+
+
+### Set Idempotent ID
+## Overwrite guid with value from line 41
+@ubuntu_request_id = {{$guid}}
+
+
+
+### Create an Image (with Ntnx-Request-Id)
+# @name image_create
+curl --request POST \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --header "Ntnx-Request-Id: {{ubuntu_request_id}}" \
+     --data '{
+          "name": "ubuntu",
+          "type": "DISK_IMAGE",
+          "source": {
+               "url": "{{ubuntu_uri}}",
+               "allowInsecure": false,
+               "$objectType": "vmm.v4.images.UrlSource"
+          },
+          "initialClusterLocations": [
+               {
+                    "extId": "{{cluster_uuid}}"
+               }
+          ]
+          }
+     '
+
+### Set Idempotent ID
+@ubuntu_offsite_request_id = {{$guid}}
+
+
+### Create one more Image
+# @name image_create
+curl --request POST \
+     --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images/" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     --header "Ntnx-Request-Id: {{ubuntu_offsite_request_id}}" \
+     --data '{
+          "name": "ubuntu-offsite",
+          "type": "DISK_IMAGE",
+          "source": {
+               "url": "{{ubuntu_uri}}",
+               "allowInsecure": false,
+               "$objectType": "vmm.v4.images.UrlSource"
+          },
+          "initialClusterLocations": [
+               {
+                    "extId": "{{cluster_uuid}}"
+               }
+          ]
+          }
+     '
+
+
+

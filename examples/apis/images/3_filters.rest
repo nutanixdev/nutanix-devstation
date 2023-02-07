@@ -1,0 +1,23 @@
+### Set endpoint
+@pc-ip = {{$dotenv pc-ip}}
+@basic_auth = Basic {{$dotenv username}} {{$dotenv password}}
+@contentType = application/json
+@accept = application/json
+
+
+
+### Get Image List and Filter Existing Image (with OData filters)
+# @name images_list
+curl --request GET \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}" \
+     # --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images?$filter=name eq 'ubuntu'"
+     # --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images?$filter=startswith(name, 'ubuntu')"
+     # --url "https://{{pc-ip}}:9440/api/vmm/v4.0.a1/images?$filter=contains(name, 'offsite')"
+
+
+
+
+
+
