@@ -44,7 +44,7 @@
 			},
 			"extensions": [
 				"richie5um2.vscode-statusbar-json-path",
-				"mutantdino.resourcemonitor",
+				// "mutantdino.resourcemonitor",
 				"ms-kubernetes-tools.vscode-kubernetes-tools",
 				"humao.rest-client"
 			]
