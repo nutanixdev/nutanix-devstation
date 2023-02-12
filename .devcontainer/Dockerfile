@@ -71,9 +71,9 @@ RUN if [ "${CALM_DSL_VERSION}" != "none" ]; then \
     fi \
     && rm -rf /tmp/library-scripts
 
+# Install Cookiecutter
 RUN if [ "${COOKIECUTTER_VERSION}" != "none" ]; then \
-        pip install cookiecutter==${COOKIECUTTER_VERSION} \
-        && export PATH=$HOME/.local/bin:$PATH; \
+        pip3 --disable-pip-version-check --no-cache-dir install cookiecutter==${COOKIECUTTER_VERSION}; \
     fi
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
