@@ -39,7 +39,7 @@ RUN if [ "${OPENSHIFT_INSTALL_VERSION}" != "none" ]; then \
 
 # Install Ansible
 RUN if [ "${ANSIBLE_VERSION}" != "none" ]; then \
-        pip3 --disable-pip-version-check --no-cache-dir install ansible==${ANSIBLE_VERSION} \
+        pip3 --disable-pip-version-check --no-cache-dir install jmespath ansible==${ANSIBLE_VERSION} \
         && su vscode -c "ansible-galaxy collection install nutanix.ncp"; \
     fi
 

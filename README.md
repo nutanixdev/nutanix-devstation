@@ -1,4 +1,4 @@
-# Nutanix DevStation
+# Nutanix Dev Station
 
 A toolkit container for automating Nutanix and its applications, deploying Kubernetes, and operating the platform at scale.
 
@@ -25,7 +25,7 @@ git clone https://github.com/nutanixdev/nutanix-devstation.git --config core.aut
 - [x] Python v3.11.x
 - [x] Calm DSL v3.6.1
 - [x] Ansible v2.14.3 (pip v7.3.0)
-- [x] Terraform v1.4.1
+- [x] Terraform v1.4.6
 - [x] PowerShell v7.3.3
 - [x] Packer v1.8.6
 - [x] Kubectl v1.26.2
@@ -57,7 +57,7 @@ git clone https://github.com/nutanixdev/nutanix-devstation.git --config core.aut
 
 ## How it works
 
-The Nutanix DevStation doesn't ship a container image, instead it builds a local image in your computer based on the settings in the `devcontainer.json` file included in the `.devcontainer` directory.
+The Nutanix Dev Station doesn't ship a container image, instead it builds a local image in your computer based on the settings in the `devcontainer.json` file included in the `.devcontainer` directory.
 
 When opening a project in VS Code that includes the `.devcontainer` directory, the Dev Container extension prompts the option for building the container. Then the project folder is mounted inside the container. The content of the project folder is always available regardless of opening it locally or in the container.
 
@@ -75,7 +75,7 @@ You only need the `.devcontainer` directory in the project root folder:
 
 ## How to contribute
 
-We glady welcome contributions from the community. From updating the documentation to adding more functions for DevStation, all ideas are welcome. Thank you in advance for all of your issues, pull requests, and comments!
+We gladly welcome contributions from the community. From updating the documentation to adding more functions for Dev Station, all ideas are welcome. Thank you in advance for all of your issues, pull requests, and comments!
 
 - [Contributing guide](./CONTRIBUTING.md)
 
@@ -91,4 +91,4 @@ This version is EA and has been tested with different OSes and container engines
 
 ### Version 0.1.x
 
-0.1.x versions were the initial version of the Nutanix DevStation and used internally for demos.
+0.1.x versions were the initial version of the Nutanix Dev Station and used internally for demos.
