@@ -55,6 +55,19 @@ curl --request POST \
           }
      '
 
+### Get the link for querying the task
+@task_link = {{image_create.response.body.metadata.links[0].href}}
+
+### Get the Task Info
+# @name get_task_info
+curl --request GET \
+     --url "{{task_link}}" \
+     --header "Accept: {{accept}}" \
+     --header "Content-Type: {{contentType}}" \
+     --header "Authorization: {{basic_auth}}"
+
+
+
 ### Set Idempotent ID
 @ubuntu_offsite_request_id = {{$guid}}
 
