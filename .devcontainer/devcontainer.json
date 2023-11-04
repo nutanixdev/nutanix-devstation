@@ -9,15 +9,15 @@
 			"VARIANT": "3.11-bullseye",
 			// Options
 			"ANSIBLE_VERSION": "7.3.0",
-			"PACKER_VERSION": "1.8.6",
-			"CALM_DSL_VERSION": "3.6.1", // "master",
+			"PACKER_VERSION": "1.9.2",
+			"CALM_DSL_VERSION": "3.7.0", // "master",
 			"KUBECTL_KARBON": "true",
 			"NUTANIX_V4_SDK": "true",
-			"OPENSHIFT_CLI_VERSION": "stable-4.12",
-			"OPENSHIFT_INSTALL_VERSION": "stable-4.12",
-			"CLUSTERCTL_VERSION": "1.3.5",
-			"K9S_VERSION": "0.27.3",
-			"COOKIECUTTER_VERSION": "2.1.1"
+			"OPENSHIFT_CLI_VERSION": "stable-4.14",
+			"OPENSHIFT_INSTALL_VERSION": "stable-4.14",
+			"CLUSTERCTL_VERSION": "1.5.3",
+			"K9S_VERSION": "0.27.4",
+			"COOKIECUTTER_VERSION": "2.4.0"
 		}
 	},
 	"mounts": [
@@ -26,17 +26,17 @@
 	],
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {
-			"version": "2.25.1"
+			"version": "2.38.0"
 		},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
 		"ghcr.io/devcontainers/features/powershell:1": {
-			"version": "7.3.3"
+			"version": "7.3.9"
 		},
 		"ghcr.io/devcontainers/features/terraform:1": {
-			"version": "1.4.6",
-			"tflint": "0.45.0",
-			"terragrunt": "0.44.5"
+			"version": "1.5.5",
+			"tflint": "0.48.0",
+			"terragrunt": "0.53.1"
 		}
 	},
 	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
@@ -47,6 +47,7 @@
 			},
 			"extensions": [
 				"richie5um2.vscode-statusbar-json-path",
+				"mhutchie.git-graph",
 				// "mutantdino.resourcemonitor",
 				"ms-kubernetes-tools.vscode-kubernetes-tools",
 				"humao.rest-client"

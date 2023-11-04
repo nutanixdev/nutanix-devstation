@@ -23,21 +23,21 @@ git clone https://github.com/nutanixdev/nutanix-devstation.git --config core.aut
 ### CLIs
 
 - [x] Python v3.11.x
-- [x] Calm DSL v3.6.1
-- [x] Ansible v2.14.3 (pip v7.3.0)
-- [x] Terraform v1.4.6
-- [x] PowerShell v7.3.3
-- [x] Packer v1.8.6
-- [x] Kubectl v1.26.2
-- [x] Helm v3.11.2
-- [x] minikube v1.29.0
-- [x] Kubectl-karbon v0.9.6
-- [x] OpenShift CLI (oc) v4.12.6
-- [x] OpenShift Install CLI v4.12.6
-- [x] Clusterctl v1.3.5
-- [x] k9s v0.27.3
-- [x] Cookiecutter v2.1.1
-- [x] GitHub CLI v2.25.1
+- [x] Calm DSL v3.7.0
+- [x] Ansible v2.14.11 (pip v7.3.0)
+- [x] Terraform v1.5.5
+- [x] PowerShell v7.3.9
+- [x] Packer v1.9.2
+- [x] Kubectl v1.28.3
+- [x] Helm v3.13.1
+- [x] minikube v1.31.2
+- [x] Kubectl-karbon v0.11.4
+- [x] OpenShift CLI (oc) v4.14.1
+- [x] OpenShift Install CLI v4.14.1
+- [x] Clusterctl v1.5.3
+- [x] k9s v0.27.4
+- [x] Cookiecutter v2.4.0
+- [x] GitHub CLI v2.38.0
 - [ ] Nutanix CLI (nCLI)
 - [ ] Acropolis CLI (aCLI)
 
@@ -65,13 +65,25 @@ Additionally, two container volumes are used for persisting Calm DSL cache and b
 
 ## How to use
 
+### Quick Install
+
+1. Clone, or download and extract the repository.
+
+2. Open the folder in VS Code and when prompted, click `Reopen in Container`.
+
+3. Enjoy the Nutanix Dev Station!
+
+### Re-use Dev Containers in another project
+
 You only need the `.devcontainer` directory in the project root folder:
 
-1. Clone or download the repository.
+1. Clone, or download and extract the repository.
 
-1. Copy or move the `.devcontainer` directory to your project.
+2. Copy or move the `.devcontainer` directory to your project.
 
-1. To enable/disable or configure different tool versions, edit the `devcontainer.json` file in the `.devcontainer` directory.
+### Advanced Settings
+
+To enable/disable or configure different tool versions, edit the `devcontainer.json` file in the `.devcontainer` directory.
 
 ## How to contribute
 
@@ -84,6 +96,13 @@ We gladly welcome contributions from the community. From updating the documentat
 https://www.nutanix.com/legal/terms-of-use 
 
 ## CHANGELOG
+
+### Version 0.3.0
+
+- Tool versions have been updated.
+- Fix zsh history.
+- Include detailed changelog file.
+- Update and include new Nutanix SDKs.
 
 ### Version 0.2.0
 
