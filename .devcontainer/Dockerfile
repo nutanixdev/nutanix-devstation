@@ -20,12 +20,12 @@ ARG COOKIECUTTER_VERSION="none"
 
 COPY library-scripts/*.sh /tmp/library-scripts/
 
-# Persist bash history - https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+# Persist bash/zsh history - https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/home/$USERNAME/.nutanixdev/.bash_history" \
     && mkdir /home/$USERNAME/.nutanixdev \
     && touch /home/$USERNAME/.nutanixdev/.bash_history \
     && chown -R $USERNAME /home/$USERNAME/.nutanixdev \
-    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
+    && echo "$SNIPPET" | tee -a /home/$USERNAME/.bashrc /home/$USERNAME/.zshrc
 
 # Install OpenShift CLI
 RUN if [ "${OPENSHIFT_CLI_VERSION}" != "none" ]; then \
@@ -39,7 +39,7 @@ RUN if [ "${OPENSHIFT_INSTALL_VERSION}" != "none" ]; then \
 
 # Install Ansible
 RUN if [ "${ANSIBLE_VERSION}" != "none" ]; then \
-        pip3 --disable-pip-version-check --no-cache-dir install jmespath ansible==${ANSIBLE_VERSION} \
+        pip3 --disable-pip-version-check --no-cache-dir install ansible==${ANSIBLE_VERSION} \
         && su vscode -c "ansible-galaxy collection install nutanix.ncp"; \
     fi
 
