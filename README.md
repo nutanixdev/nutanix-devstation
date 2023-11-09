@@ -99,10 +99,12 @@ https://www.nutanix.com/legal/terms-of-use
 
 ### Version 0.3.0
 
+- Support for persistent user profile (.calm and .nutanixdev volumes are migrated to a new one)
 - Tool versions have been updated.
 - Fix zsh history.
 - Include detailed changelog file.
-- Update and include new Nutanix SDKs.
+- Update and include new Nutanix SDKs for Nutanix Disaster Recovery, Microseg and Networking.
+- Normalization (LF and CRLF)
 
 ### Version 0.2.0
 
