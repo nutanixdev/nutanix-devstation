@@ -21,10 +21,13 @@
 		}
 	},
 	"mounts": [
-		"source=vscode-devcontainer-nutanixdev-calmdsl-cache-${devcontainerId},target=/home/vscode/.calm,type=volume",
-		"source=vscode-devcontainer-nutanixdev-bashhistory-${devcontainerId},target=/home/vscode/.nutanixdev,type=volume"
+		"source=vscode-devcontainer-nutanixdev-calmdsl-cache-${devcontainerId},target=/calm,type=volume",
+		"source=vscode-devcontainer-nutanixdev-bashhistory-${devcontainerId},target=/nutanixdev,type=volume",
+		"source=vscode-devcontainer-nutanixdev-profile-${localWorkspaceFolderBasename}-${devcontainerId},target=/home/vscode,type=volume",
+		"target=/home/vscode/.vscode-server,type=volume"
 	],
 	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {
 			"version": "2.38.0"
 		},
@@ -47,10 +50,16 @@
 			},
 			"extensions": [
 				"richie5um2.vscode-statusbar-json-path",
-				"mhutchie.git-graph",
-				// "mutantdino.resourcemonitor",
+				"mutantdino.resourcemonitor",
 				"ms-kubernetes-tools.vscode-kubernetes-tools",
-				"humao.rest-client"
+				"humao.rest-client",
+				"mhutchie.git-graph",
+				"johnpapa.vscode-peacock",
+				"wayou.vscode-todo-highlight",
+				"timonwong.shellcheck",
+				"streetsidesoftware.code-spell-checker",
+				"yzhang.markdown-all-in-one",
+				"vscode-icons-team.vscode-icons"
 			]
 		}
 	}
