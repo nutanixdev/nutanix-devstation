@@ -9,3 +9,13 @@ if command -v pwsh > /dev/null 2>&1
 then
     pwsh -Command Install-Module Nutanix.Cli -Force
 fi
+
+if [ -d "/calm" ] && [ -z "$(ls -A $HOME/.calm)" ]
+then
+    sudo cp -a /calm/. $HOME/.calm/
+fi
+
+if [ -d "/nutanixdev" ] && [ -z "$(ls -A $HOME/.nutanixdev)" ]
+then
+    cp -a /nutanixdev/. $HOME/.nutanixdev/
+fi

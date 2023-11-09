@@ -1,0 +1,6 @@
+# Auto detect text files and perform EOL normalization
+* text=auto eol=lf
+
+# Windows batch files require CRLF
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf

@@ -20,12 +20,13 @@ ARG COOKIECUTTER_VERSION="none"
 
 COPY library-scripts/*.sh /tmp/library-scripts/
 
-# Persist bash history - https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+# Persist bash/zsh history - https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/home/$USERNAME/.nutanixdev/.bash_history" \
     && mkdir /home/$USERNAME/.nutanixdev \
     && touch /home/$USERNAME/.nutanixdev/.bash_history \
-    && chown -R $USERNAME /home/$USERNAME/.nutanixdev \
-    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
+    && mkdir /home/$USERNAME/.vscode-server \
+    && chown -R $USERNAME /home/$USERNAME \
+    && echo "$SNIPPET" | tee -a /home/$USERNAME/.bashrc /home/$USERNAME/.zshrc
 
 # Install OpenShift CLI
 RUN if [ "${OPENSHIFT_CLI_VERSION}" != "none" ]; then \
@@ -39,8 +40,8 @@ RUN if [ "${OPENSHIFT_INSTALL_VERSION}" != "none" ]; then \
 
 # Install Ansible
 RUN if [ "${ANSIBLE_VERSION}" != "none" ]; then \
-        pip3 --disable-pip-version-check --no-cache-dir install jmespath ansible==${ANSIBLE_VERSION} \
-        && su vscode -c "ansible-galaxy collection install nutanix.ncp"; \
+        pip3 --disable-pip-version-check --no-cache-dir install ansible==${ANSIBLE_VERSION} \
+        && su $USERNAME -c "ansible-galaxy collection install nutanix.ncp"; \
     fi
 
 # Install Packer
@@ -60,7 +61,7 @@ RUN if [ "${K9S_VERSION}" != "none" ]; then \
 
 # Install kubectl karbon
 RUN if [ "${KUBECTL_KARBON}" != "false" ]; then \
-        su vscode -c "umask 0002 && . /tmp/library-scripts/kubectlkarbon-linux.sh"; \
+        su $USERNAME -c "umask 0002 && . /tmp/library-scripts/kubectlkarbon-linux.sh"; \
     fi
 
 # Install Calm DSL
@@ -76,15 +77,6 @@ RUN if [ "${COOKIECUTTER_VERSION}" != "none" ]; then \
         pip3 --disable-pip-version-check --no-cache-dir install cookiecutter==${COOKIECUTTER_VERSION}; \
     fi
 
-# [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
-# COPY requirements.txt /tmp/pip-tmp/
-# RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-#    && rm -rf /tmp/pip-tmp
-
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
-
 # Copy all requirement files
 COPY requirements/*.txt /tmp/pip-tmp/
 
@@ -95,7 +87,3 @@ RUN if [ "${NUTANIX_V4_SDK}" != "false" ]; then \
 
 # Delete all requirement files in tmp
 RUN rm -rf /tmp/pip-tmp
-
-# [Optional] Uncomment this line to install global node packages.
-# RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
-
