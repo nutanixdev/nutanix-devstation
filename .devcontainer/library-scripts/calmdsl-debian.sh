@@ -112,8 +112,6 @@ fi
 # Install Calm DSL
 unzip ${calmdsl_filename}
 cd calm-dsl-${CALM_DSL_VERSION}
-# sed -i "s/asciimatics>==1.13.0/asciimatics>=1.13.0/" requirements.txt
-sed -i "s/requests==2.27.0/requests>=2.27.0/" requirements.txt
 pip3 --disable-pip-version-check --no-cache-dir install -r requirements.txt
 make dist
 pip3 --disable-pip-version-check --no-cache-dir install dist/calm.dsl*.whl
