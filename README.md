@@ -97,6 +97,10 @@ https://www.nutanix.com/legal/terms-of-use
 
 ## CHANGELOG
 
+### Version 0.4.0
+
+- Python updated to version 3.12
+
 ### Version 0.3.0
 
 - Support for persistent user profile (.calm and .nutanixdev volumes are migrated to a new one)
