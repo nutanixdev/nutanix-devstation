@@ -23,7 +23,7 @@ git clone https://github.com/nutanixdev/nutanix-devstation.git --config core.aut
 ### CLIs
 
 - [x] Python v3.11.x
-- [x] Calm DSL v3.7.0
+- [x] Calm DSL latest
 - [x] Ansible v2.14.11 (pip v7.3.0)
 - [x] Terraform v1.5.5
 - [x] PowerShell v7.3.9
