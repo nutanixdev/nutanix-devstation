@@ -1,3 +1,9 @@
+2024-02-17
+
+- Update: v3.12 is the new default Python container image 
+- Update: bump tools and SDKs versions
+- Update: a few devcontainer features changed to install latest
+
 2023-11-09
 
 - Added: support for persistent user profile
