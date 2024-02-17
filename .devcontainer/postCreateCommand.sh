@@ -12,7 +12,7 @@ fi
 
 if [ -d "/calm" ] && [ -z "$(ls -A $HOME/.calm)" ]
 then
-    sudo cp -a /calm/. $HOME/.calm/
+    cp -a /calm/. $HOME/.calm/
 fi
 
 if [ -d "/nutanixdev" ] && [ -z "$(ls -A $HOME/.nutanixdev)" ]

@@ -22,22 +22,22 @@ git clone https://github.com/nutanixdev/nutanix-devstation.git --config core.aut
 
 ### CLIs
 
-- [x] Python v3.11.x
-- [x] Calm DSL v3.7.0
-- [x] Ansible v2.14.11 (pip v7.3.0)
+- [x] Python v3.12.x
+- [x] Calm DSL latest
+- [x] Ansible v2.16.3 (pip v9.2.0)
 - [x] Terraform v1.5.5
-- [x] PowerShell v7.3.9
+- [x] PowerShell v7.4.1
 - [x] Packer v1.9.2
-- [x] Kubectl v1.28.3
-- [x] Helm v3.13.1
-- [x] minikube v1.31.2
-- [x] Kubectl-karbon v0.11.4
-- [x] OpenShift CLI (oc) v4.14.1
-- [x] OpenShift Install CLI v4.14.1
-- [x] Clusterctl v1.5.3
-- [x] k9s v0.27.4
-- [x] Cookiecutter v2.4.0
-- [x] GitHub CLI v2.38.0
+- [x] Kubectl v1.29.2
+- [x] Helm v3.14.1
+- [x] minikube v1.32.0
+- [x] Kubectl-karbon v0.11.5
+- [x] OpenShift CLI (oc) v4.14.11
+- [x] OpenShift Install CLI v4.14.11
+- [x] Clusterctl v1.6.1
+- [x] k9s v0.31.9
+- [x] Cookiecutter v2.5.0
+- [x] GitHub CLI v2.44.1
 - [ ] Nutanix CLI (nCLI)
 - [ ] Acropolis CLI (aCLI)
 
@@ -96,6 +96,10 @@ We gladly welcome contributions from the community. From updating the documentat
 https://www.nutanix.com/legal/terms-of-use 
 
 ## CHANGELOG
+
+### Version 0.4.0
+
+- Python updated to version 3.12
 
 ### Version 0.3.0
 

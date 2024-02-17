@@ -1,23 +1,23 @@
 {
-	"name": "Nutanix DevStation (Community)",
+	"name": "Nutanix Dev Station (Community)",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use -bullseye variants on local on arm64/Apple Silicon.
-			"VARIANT": "3.11-bullseye",
+			"VARIANT": "3.12-bullseye",
 			// Options
-			"ANSIBLE_VERSION": "7.3.0",
-			"PACKER_VERSION": "1.9.2",
-			"CALM_DSL_VERSION": "3.7.0", // "master",
+			"ANSIBLE_VERSION": "9.2.0",
+			"PACKER_VERSION": "1.9.2", // latest releases under MPL
+			"CALM_DSL_VERSION": "master", // "master",
 			"KUBECTL_KARBON": "true",
 			"NUTANIX_V4_SDK": "true",
 			"OPENSHIFT_CLI_VERSION": "stable-4.14",
 			"OPENSHIFT_INSTALL_VERSION": "stable-4.14",
-			"CLUSTERCTL_VERSION": "1.5.3",
-			"K9S_VERSION": "0.27.4",
-			"COOKIECUTTER_VERSION": "2.4.0"
+			"CLUSTERCTL_VERSION": "1.6.1",
+			"K9S_VERSION": "0.31.9",
+			"COOKIECUTTER_VERSION": "2.5.0"
 		}
 	},
 	"mounts": [
@@ -28,18 +28,14 @@
 	],
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {
-			"version": "2.38.0"
-		},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
-		"ghcr.io/devcontainers/features/powershell:1": {
-			"version": "7.3.9"
-		},
+		"ghcr.io/devcontainers/features/powershell:1": {},
 		"ghcr.io/devcontainers/features/terraform:1": {
-			"version": "1.5.5",
-			"tflint": "0.48.0",
-			"terragrunt": "0.53.1"
+			"version": "1.5.5", // latest releases under MPL
+			"tflint": "0.50.3",
+			"terragrunt": "0.55.2"
 		}
 	},
 	"postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
