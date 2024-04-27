@@ -1,3 +1,8 @@
+2024-04-27
+
+- Update: The v3.12 Python container image OS updated to Debian 12 (bookworm)
+- Update: bump tools and SDKs versions
+
 2024-02-17
 
 - Update: v3.12 is the new default Python container image 
