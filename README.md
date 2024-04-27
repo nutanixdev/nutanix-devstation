@@ -22,22 +22,22 @@ git clone https://github.com/nutanixdev/nutanix-devstation.git --config core.aut
 
 ### CLIs
 
-- [x] Python v3.12.x
-- [x] Calm DSL latest
-- [x] Ansible v2.16.3 (pip v9.2.0)
-- [x] Terraform v1.5.5
-- [x] PowerShell v7.4.1
-- [x] Packer v1.9.2
-- [x] Kubectl v1.29.2
-- [x] Helm v3.14.1
-- [x] minikube v1.32.0
-- [x] Kubectl-karbon v0.11.5
-- [x] OpenShift CLI (oc) v4.14.11
-- [x] OpenShift Install CLI v4.14.11
-- [x] Clusterctl v1.6.1
-- [x] k9s v0.31.9
+- [x] Python v3.12.x                    (Debian 12 bookworm)
+- [x] Calm DSL latest                   (last validated: 3.7.2.1)
+- [x] PowerShell latest                 (last validated: 7.4.2)
+- [x] Ansible v2.16.6                   (pip v9.5.1)
+- [x] Terraform v1.5.5                  (latest releases under MPL)
+- [x] Packer v1.9.2                     (latest releases under MPL)
+- [x] Kubectl latest                    (last validated: 1.30.0)
+- [x] Helm latest                       (last validated: 3.14.4)
+- [x] minikube latest                   (last validated: 1.33.0)
+- [x] Kubectl-karbon latest             (last validated: 0.11.5)
+- [x] OpenShift CLI (oc) stable-4.15    (last validated: 4.15.9)
+- [x] OpenShift Install stable-4.15     (last validated: 4.15.9)
+- [x] Clusterctl v1.7.1
+- [x] k9s v0.32.4
 - [x] Cookiecutter v2.5.0
-- [x] GitHub CLI v2.44.1
+- [x] GitHub CLI latest                 (last validated: 2.48.0)
 - [ ] Nutanix CLI (nCLI)
 - [ ] Acropolis CLI (aCLI)
 
@@ -96,6 +96,10 @@ We gladly welcome contributions from the community. From updating the documentat
 https://www.nutanix.com/legal/terms-of-use 
 
 ## CHANGELOG
+
+### Version 0.5.0
+
+- OS updated to Debian 12 bookworm
 
 ### Version 0.4.0
 
